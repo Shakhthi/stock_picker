@@ -5,6 +5,7 @@ from typing import List
 from pydantic import BaseModel, Field
 
 from stock_picker_agent.tools.utils import web_search
+from stock_picker_agent.tools.utils import PushNotificationTool, JsonTool
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
@@ -41,17 +42,17 @@ class StockPickerAgent():
     @agent
     def trending_company_finder(self) -> Agent:
         """Find companies that are trending in the news"""
-        return Agent(config=self.agents_config['trending_company_finder'], tools=[web_search])
+        return Agent(config=self.agents_config['trending_company_finder'], tools=[web_search, JsonTool()])
     
     @agent
     def financial_researcher(self) -> Agent:
         """Provide detailed research on trending companies"""
-        return Agent(config=self.agents_config['financial_researcher'], tools=[web_search])
+        return Agent(config=self.agents_config['financial_researcher'], tools=[web_search, JsonTool()])
     
     @agent
     def stock_picker(self) -> Agent:
         """Pick the best company for investment"""
-        return Agent(config=self.agents_config['stock_picker'])
+        return Agent(config=self.agents_config['stock_picker'], tools=[PushNotificationTool(), JsonTool()])
     
     @task
     def find_trending_companies(self) -> Task:

@@ -176,6 +176,7 @@ et-xmlfile==2.0.0
 executing==2.2.1
     # via stack-data
 fastapi==0.119.1
+fastapi_sso
     # via
     #   stock-picker-agent (pyproject.toml)
     #   gradio

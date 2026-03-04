@@ -19,6 +19,7 @@ def run():
     """
     inputs = {
         "sector": "technology",
+        "current_date": datetime.now().strftime("%m-%d-%Y"),
     }
     result = None
     try:
