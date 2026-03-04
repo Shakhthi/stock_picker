@@ -2,9 +2,32 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
+from pydantic import BaseModel, Field
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
+
+
+class TrandingCompanies(BaseModel):
+    """A comapny that is trending in the news"""
+    name: str = Field(description = "The name of the company")
+    ticker: str = Field(description = "The stock ticker of the company")
+    reason: str = Field(description = "Why the company is trending in the news")
+
+class TrendingCompaniesList(BaseModel):
+    """A list of companies that are trending in the news"""
+    companies: List[TrandingCompanies] = Field(description = "A list of companies that are trending in the news")
+
+class TrendingCompanyResearch(BaseModel):
+    """A detailed research report on a trending company"""
+    name: str = Field(description = "The name of the company")
+    market_position: str = Field(description = "The company's position in the market")
+    future_outlook: str = Field(description = "The future outlook of the company")
+    investment_potential: str = Field(description = "The investment potential of the company")
+
+class TrendingCompanyResearchList(BaseModel):
+    """A list of detailed research reports on trending companies"""
+    research: List[TrendingCompanyResearch] = Field(description = "A list of detailed research reports on trending companies")
 
 @CrewBase
 class StockPickerAgent():
