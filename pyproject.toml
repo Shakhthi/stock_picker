@@ -40,7 +40,10 @@ dependencies = [
     "wikipedia>=1.4.0",
     "chromadb>=1.1.0",
     "hnswlib>=0.7.0",
-    "crewai==1.9.3"
+    "crewai==1.9.3",
+    "litellm>=1.75.3",
+    "fastapi>=0.115.0,<0.120.0",
+    "apscheduler>=3.11.2",
 ]
 
 [project.scripts]
